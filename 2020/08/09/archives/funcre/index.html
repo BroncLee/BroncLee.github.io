@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   
-
   <title>函数返回值浅谈 | 李博文的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="一般的来说，函数是可以返回局部变量的。 局部变量的作用域只在函数内部，在函数返回后，局部变量的内存已经释放了。因此，如果函数返回的是局部变量的值，不涉及地址，程序不会出错。但是如果返回的是局部变量的地址(指针)的话，程序运行后会出错。因为函数只是把指针复制后返回了，但是指针指向的内容已经被释放了，这样指针指向的内容就是不可预料的内容，调用就会出错。准确的来说，函数不能通过返回指向栈内存的指针(">
@@ -32,7 +31,6 @@
 
   
 
-
 <meta name="generator" content="Hexo 5.0.0"></head>
 
 <body>
@@ -45,9 +43,9 @@
     <div id="header-inner" class="inner">
       <nav id="sub-nav">
         
-          <!-- <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a> -->
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <!-- <a id="nav-search-btn" class="nav-icon" title="搜索"></a> -->
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="libowen.info"></form>
@@ -136,7 +134,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="libowen.info/2020/08/09/archives/funcre/" data-id="ckdmuzv2d0004s0vm7cmwcqwu" class="article-share-link">分享</a>
+      <a data-url="libowen.info/2020/08/09/archives/funcre/" data-id="ckdmvn0qs000510vm49fwfu1g" class="article-share-link">分享</a>
       
       
       
@@ -226,12 +224,7 @@
  
   
 
-
-{% if post.top %}
-    <i class="fa fa-thumb-tack"></i>
-    <font color=7D26CD>置顶</font>
-    <span class="post-meta-divider">|</span>
-{% endif %}</section>
+</section>
            
     <aside id="sidebar">
   
