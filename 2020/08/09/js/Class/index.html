@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  <title>ES6Class的基础语法 | 李博文的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、Class 的基本语法静态方法与静态属性\1. 不会被类实例所拥有的属性与方法 只是类自身拥有\2. 只能通过类调用 静态方法与普通方法重名，不会冲突static 关键字（静态方法） 静态属性类名.属性名 &#x3D; 属性值;  静态属性的声明，应该在类外部，使用“类名.属性名”的方式声明。 静态方法的调用，应该直接在类上调用，而不是在类的实例上调用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6Class的基础语法">
+<meta property="og:url" content="libowen.info/2020/08/09/js/Class/index.html">
+<meta property="og:site_name" content="李博文的个人博客">
+<meta property="og:description" content="一、Class 的基本语法静态方法与静态属性\1. 不会被类实例所拥有的属性与方法 只是类自身拥有\2. 只能通过类调用 静态方法与普通方法重名，不会冲突static 关键字（静态方法） 静态属性类名.属性名 &#x3D; 属性值;  静态属性的声明，应该在类外部，使用“类名.属性名”的方式声明。 静态方法的调用，应该直接在类上调用，而不是在类的实例上调用。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-09T09:00:51.000Z">
+<meta property="article:modified_time" content="2020-08-09T09:01:49.688Z">
+<meta property="article:author" content="Libowen">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="李博文的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="[object Object]">
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <!-- <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a> -->
+        
+        <!-- <a id="nav-search-btn" class="nav-icon" title="搜索"></a> -->
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="libowen.info"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">李博文的个人博客</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-js/Class" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/09/js/Class/" class="article-date">
+  <time datetime="2020-08-09T09:00:51.000Z" itemprop="datePublished">2020-08-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>►<a class="article-category-link" href="/categories/IT/JS/">JS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6Class的基础语法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="一、Class-的基本语法"><a href="#一、Class-的基本语法" class="headerlink" title="一、Class 的基本语法"></a>一、Class 的基本语法</h1><h3 id="静态方法与静态属性"><a href="#静态方法与静态属性" class="headerlink" title="静态方法与静态属性"></a>静态方法与静态属性</h3><p>\1. 不会被类实例所拥有的属性与方法 只是类自身拥有<br>\2. 只能通过类调用</p>
+<p>静态方法与普通方法重名，不会冲突<br>static 关键字（静态方法）</p>
+<p>静态属性<br>类名.属性名 = 属性值;</p>
+<ul>
+<li>静态属性的声明，应该在类外部，使用“类名.属性名”的方式声明。</li>
+<li>静态方法的调用，应该直接在类上调用，而不是在类的实例上调用。</li>
+</ul>
+<a id="more"></a>
+
+<hr>
+<h3 id="1-静态方法"><a href="#1-静态方法" class="headerlink" title="1.静态方法"></a>1.静态方法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;                </span><br><span class="line">    <span class="keyword">static</span> baz()&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    baz()&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;world&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bar</span> <span class="keyword">extends</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> bar()&#123;</span><br><span class="line">        <span class="built_in">this</span>.baz();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">Bar.bar(); <span class="comment">//&quot;hello&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>Foo</code>类的第一个<code>baz</code>方法前有<code>static</code>关键字，表明该方法是一个静态方法，可以直接在<code>Foo</code>类上调用（<code>Foo.baz()</code>），而不是在<code>Foo</code>类的实例上调用。如果在实例上调用静态方法，会抛出一个错误，表示不存在该方法。父类<code>Foo</code>有一个静态方法，子类<code>Bar</code>可以调用这个方法。静态方法<code>bar</code>调用了<code>this.baz</code>，这里的<code>this</code>指的是<code>Foo</code>类，而不是<code>Foo</code>的实例，等同于调用<code>Foo.baz</code>。另外，从这个例子还可以看出，静态方法可以与非静态方法重名。</p>
+<ul>
+<li>如果静态方法包含<code>this</code>关键字，这个<code>this</code>指的是类，而不是实例。</li>
+</ul>
+<h3 id="2-静态属性"><a href="#2-静态属性" class="headerlink" title="2.静态属性"></a>2.静态属性</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//职业类</span></span><br><span class="line">   <span class="class"><span class="keyword">class</span> <span class="title">Profession</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="class"><span class="keyword">class</span> <span class="title">Character</span> </span>&#123;</span><br><span class="line">       <span class="keyword">constructor</span>(pfs) &#123;</span><br><span class="line">           <span class="built_in">this</span>.pfs = pfs;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">// 静态属性做配置</span></span><br><span class="line">   Character.config = &#123;</span><br><span class="line">       profession: &#123;</span><br><span class="line">           <span class="string">&#x27;法师&#x27;</span>: <span class="number">1</span>,</span><br><span class="line">           <span class="string">&#x27;刺客&#x27;</span>: <span class="number">2</span></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">// 创建类的实例</span></span><br><span class="line">   <span class="keyword">new</span> Character(Character.config.profession[<span class="string">&#x27;法师&#x27;</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>上面的写法为<code>Character</code>类定义了一个静态属性<code>config</code>。</p>
+<h3 id="3-私有方法"><a href="#3-私有方法" class="headerlink" title="3.私有方法"></a>3.私有方法</h3><p>私有方法和私有属性，是只能在类的内部访问的方法和属性，外部不能访问。这是常见需求，有利于代码的封装，但 ES6 不提供，只能通过变通方法模拟实现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Widget</span> </span>&#123;</span><br><span class="line">  foo (baz) &#123;</span><br><span class="line">    bar.call(<span class="built_in">this</span>, baz);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">baz</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.snaf = baz;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>将私有方法移出模块，因为模块内部的所有方法都是对外可见的。<code>foo</code>是公开方法，内部调用了<code>bar.call(this, baz)</code>。这使得<code>bar</code>实际上成为了当前模块的私有方法。</p>
+<h3 id="4-new-target"><a href="#4-new-target" class="headerlink" title="4.new.target"></a>4.new.target</h3><ul>
+<li>判断构造函数是否通过new调用</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">new</span>.target === Shape) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;本类不能实例化&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span> <span class="keyword">extends</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(length, width) &#123;</span><br><span class="line">    <span class="built_in">super</span>();</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x = <span class="keyword">new</span> Shape();  <span class="comment">// 报错</span></span><br><span class="line"><span class="keyword">var</span> y = <span class="keyword">new</span> Rectangle(<span class="number">3</span>, <span class="number">4</span>);  <span class="comment">// 正确</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>new.target的作用</strong></p>
+<p><strong>——限制类的调用方法，判断new.target是不是未定义</strong></p>
+<p><strong>—–可以写出不能独立使用、必须继承后才能使用的类。</strong></p>
+<p>上面代码中，<code>Shape</code>类不能被实例化，只能用于继承。</p>
+<p>注意，在函数外部，使用<code>new.target</code>会报错。</p>
+<h2 id="二、Class-的继承"><a href="#二、Class-的继承" class="headerlink" title="二、Class 的继承"></a>二、Class 的继承</h2><ul>
+<li>Class 可以通过<code>extends</code>关键字实现继承，这比 ES5 的通过修改原型链实现继承，要清晰和方便很多。</li>
+</ul>
+<h3 id="1-Object-getPrototypeOf"><a href="#1-Object-getPrototypeOf" class="headerlink" title="1.Object.getPrototypeOf()"></a>1.Object.getPrototypeOf()</h3><p><code>Object.getPrototypeOf</code>方法可以用来从子类上获取父类。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.getPrototypeOf(ColorPoint) === Point</span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>因此，可以使用这个方法判断，一个类是否继承了另一个类。</p>
+<h3 id="2-super关键字"><a href="#2-super关键字" class="headerlink" title="2.super关键字"></a>2.super关键字</h3><ul>
+<li>ES6中，子类必须在constructor方法中调用super方法，否则新建实例时会报错。这是因为子类自己的this对象，必须先通过父类的构造函数完成塑造，然后再加上子类自己的实例属性和方法</li>
+</ul>
+<p>在JavaScript中，this关键字总是指向函数所在的当前对象，ES6中增加了一个与this对应的super关键字，指向的是当前对象（this指向的对象）的原型对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> demo1 = &#123;</span><br><span class="line">   prop1  : <span class="string">&#x27;属性1&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> demo2 = &#123;</span><br><span class="line">    find()&#123;</span><br><span class="line">       <span class="comment">//返回demo2 的原型对象的foo属性</span></span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">super</span>.foo</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;    </span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(demo2,demo1);</span><br><span class="line">obj.find() <span class="comment">//&quot;hello&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，当super关键字表示原型对象时，只能用在对象的方法中。而在这里JavaScript引擎有一个bug。只有用对象方法的简写写法时，引擎才能确认这个函数是对象的方法，其他写法应用super的时候都会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> proto = &#123;</span><br><span class="line">   title :<span class="string">&#x27;原型对象&#x27;</span></span><br><span class="line">   sayTitle()&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">this</span>.title);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">   title : <span class="string">&#x27;对象&#x27;</span>,</span><br><span class="line">   sayPrototypeTitle()&#123;</span><br><span class="line">      <span class="built_in">super</span>.sayTitle();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(obj,proto);obj.sayPrototypeTitle();<span class="comment">// 结果：// 原型对象</span></span><br></pre></td></tr></table></figure>
+
+<p>下面是几种会报错的写法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line"><span class="comment">//报错，因为super不能应用在方法之外。</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">   protoTitle : <span class="built_in">super</span>.foo</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//因为此时JS引擎不能识别function是对象的方法，所以调用super会报错。</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">   title : <span class="string">&#x27;对象&#x27;</span>,</span><br><span class="line">   sayPrototypeTitle : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="built_in">super</span>.sayTitle();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//因为此时JS引擎不能识别“箭头函数”是对象的方法，所以调用super会报错。</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">   title : <span class="string">&#x27;对象&#x27;</span>,</span><br><span class="line">   sayPrototypeTitle =&gt; <span class="built_in">super</span>.sayTitle();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Mixin模式的实现"><a href="#2-Mixin模式的实现" class="headerlink" title="2.Mixin模式的实现"></a>2.Mixin模式的实现</h3><p>Mixin 指的是多个对象合成一个新的对象，新对象具有各个组成成员的接口。它的最简单实现如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = &#123;</span><br><span class="line">  a: <span class="string">&#x27;a&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> b = &#123;</span><br><span class="line">  b: <span class="string">&#x27;b&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> c = &#123;...a, ...b&#125;; <span class="comment">// &#123;a: &#x27;a&#x27;, b: &#x27;b&#x27;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>c</code>对象是<code>a</code>对象和<code>b</code>对象的合成，具有两者的接口。</p>
+<p>下面是一个更完备的实现，将多个类的接口“混入”（mix in）另一个类。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mix</span>(<span class="params">...mixins</span>) </span>&#123;</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Mix</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> mixin <span class="keyword">of</span> mixins) &#123;</span><br><span class="line">        copyProperties(<span class="built_in">this</span>, <span class="keyword">new</span> mixin()); <span class="comment">// 拷贝实例属性</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> mixin <span class="keyword">of</span> mixins) &#123;</span><br><span class="line">    copyProperties(Mix, mixin); <span class="comment">// 拷贝静态属性</span></span><br><span class="line">    copyProperties(Mix.prototype, mixin.prototype); <span class="comment">// 拷贝原型属性</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> Mix;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">copyProperties</span>(<span class="params">target, source</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> <span class="built_in">Reflect</span>.ownKeys(source)) &#123;</span><br><span class="line">    <span class="keyword">if</span> ( key !== <span class="string">&#x27;constructor&#x27;</span></span><br><span class="line">      &amp;&amp; key !== <span class="string">&#x27;prototype&#x27;</span></span><br><span class="line">      &amp;&amp; key !== <span class="string">&#x27;name&#x27;</span></span><br><span class="line">    ) &#123;</span><br><span class="line">      <span class="keyword">let</span> desc = <span class="built_in">Object</span>.getOwnPropertyDescriptor(source, key);</span><br><span class="line">      <span class="built_in">Object</span>.defineProperty(target, key, desc);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码的<code>mix</code>函数，可以将多个对象合成为一个类。使用的时候，只要继承这个类即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DistributedEdit</span> <span class="keyword">extends</span> <span class="title">mix</span>(<span class="title">Loggable</span>, <span class="title">Serializable</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="libowen.info/2020/08/09/js/Class/" data-id="ckdmuzv2k0008s0vm63u5bbbo" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS/" rel="tag">JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =1
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/08/09/js/Promise/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title"> ES6异步通信Promise </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+
+{% if post.top %}
+    <i class="fa fa-thumb-tack"></i>
+    <font color=7D26CD>置顶</font>
+    <span class="post-meta-divider">|</span>
+{% endif %}</section>
+           
+    <aside id="sidebar">
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81Class-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">一、Class 的基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%8E%E9%9D%99%E6%80%81%E5%B1%9E%E6%80%A7"><span class="toc-number">1.0.1.</span> <span class="toc-text">静态方法与静态属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="toc-number">1.0.2.</span> <span class="toc-text">1.静态方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%9D%99%E6%80%81%E5%B1%9E%E6%80%A7"><span class="toc-number">1.0.3.</span> <span class="toc-text">2.静态属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%A7%81%E6%9C%89%E6%96%B9%E6%B3%95"><span class="toc-number">1.0.4.</span> <span class="toc-text">3.私有方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-new-target"><span class="toc-number">1.0.5.</span> <span class="toc-text">4.new.target</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Class-%E7%9A%84%E7%BB%A7%E6%89%BF"><span class="toc-number">1.1.</span> <span class="toc-text">二、Class 的继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Object-getPrototypeOf"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.Object.getPrototypeOf()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-super%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.super关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Mixin%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.1.3.</span> <span class="toc-text">2.Mixin模式的实现</span></a></li></ol></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2020 Libowen&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;leebw529@126.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ 
+<script src="/js/is.js"></script>
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>
