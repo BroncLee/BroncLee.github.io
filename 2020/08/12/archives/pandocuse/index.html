@@ -3,20 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>关于我想对你说的话 | 李博文的个人博客</title>
+  <title>pandoc的基本使用方法 | 李博文的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我会在这里分享我的学习心得，坚持每天都有所成长，技术方面也好，其他方面也好。 总有人，山高路远，为你而来     可以打赏哦 哈哈哈嗝">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于我想对你说的话">
-<meta property="og:url" content="libowen.info/about/index.html">
+  <meta name="description" content="相信很多小伙伴都并不觉得 Word 写论文是个很好的选择，奈何很多学校最后要提交 Word 格式，而 Pandoc 是一款基于命令行的文档格式转换器，支持1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pandoc的基本使用方法">
+<meta property="og:url" content="libowen.info/2020/08/12/archives/pandocuse/index.html">
 <meta property="og:site_name" content="李博文的个人博客">
-<meta property="og:description" content="我会在这里分享我的学习心得，坚持每天都有所成长，技术方面也好，其他方面也好。 总有人，山高路远，为你而来     可以打赏哦 哈哈哈嗝">
+<meta property="og:description" content="相信很多小伙伴都并不觉得 Word 写论文是个很好的选择，奈何很多学校最后要提交 Word 格式，而 Pandoc 是一款基于命令行的文档格式转换器，支持1">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-08-09T06:02:49.000Z">
-<meta property="article:modified_time" content="2020-08-09T06:40:39.429Z">
+<meta property="og:image" content="https://picb.zhimg.com/80/v2-9a1bffedd450863e1873ee82dd55cead_720w.jpg">
+<meta property="article:published_time" content="2020-08-12T09:59:04.000Z">
+<meta property="article:modified_time" content="2020-08-12T10:40:37.552Z">
 <meta property="article:author" content="Libowen">
 <meta property="article:tag" content="李博文">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picb.zhimg.com/80/v2-9a1bffedd450863e1873ee82dd55cead_720w.jpg">
   
     <link rel="alternate" href="/atom.xml" title="李博文的个人博客" type="application/atom+xml">
   
@@ -71,10 +73,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-archives/pandocuse" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/about/index.html" class="article-date">
-  <time datetime="2020-08-09T06:02:49.000Z" itemprop="datePublished">2020-08-09</time>
+    <a href="/2020/08/12/archives/pandocuse/" class="article-date">
+  <time datetime="2020-08-12T09:59:04.000Z" itemprop="datePublished">2020-08-12</time>
 </a>
     
   </div>
@@ -85,7 +87,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于我想对你说的话
+      pandoc的基本使用方法
     </h1>
   
 
@@ -95,16 +97,32 @@
       
         <!-- Table of Contents -->
         
-        <p>我会在这里分享我的学习心得，坚持每天都有所成长，技术方面也好，其他方面也好。</p>
-<p>总有人，山高路远，为你而来</p>
+        <p>相信很多小伙伴都并不觉得 Word 写论文是个很好的选择，奈何很多学校最后要提交 Word 格式，而 Pandoc 是一款基于命令行的文档格式转换器，支持1</p>
+<a id="more"></a>
+
 <blockquote>
-<p>   可以打赏哦 哈哈哈嗝</p>
+<p>  输入格式:Markdown、格式轻量级标记语言、HTML、ReStructuredText、LaTeX、OPML、Org-mode、DocBook、Office Open XML (Microsoft Word .docx)，输出格式：Office Open XML(Microsoft Word  .docx)、OpenDocument、HTML、Wiki markup、Adobe InDesign ICML文稿 （ Adobe  InCopy文稿交换格式）、web-based slideshows、电子书（Epub格式等）、OPML多、种 TeX (以及 PDF).</p>
 </blockquote>
+<p>在转换的时候需要用到命令行语句，以下是常用命令的解释：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-s 代表的是 Standalone 转换过程，通过适当的页眉和页脚生成输出</span><br></pre></td></tr></table></figure>
+
+<p><code>-f</code> 选项代表<code> from</code> ，其后是源格式</p>
+<p><code>-t</code>选项代表<code>“to”</code>后跟输出格式</p>
+<p><code>-o</code>选项代表<code>“output”</code>，后面跟着输出文件名或是带输出名称的输出路径</p>
+<p>以及跟随在最后的原始文件名</p>
+<p><img src="https://picb.zhimg.com/80/v2-9a1bffedd450863e1873ee82dd55cead_720w.jpg" alt="img"></p>
+<p>使用的时候需要将命令行的路径，切换到你想要转换的文件目录下。在使用命令进行转换。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pandoc -s -f markdown -t icml -o <span class="keyword">my</span>.icml <span class="keyword">my</span>.md</span><br></pre></td></tr></table></figure>
+
+<p>这里我用 Pandoc 将名叫 my 的 markdown 格式转换成名叫 my 的 icml格式。</p>
+<p>通过 Pandoc 就可以使用自己喜欢的工具完成论文了。</p>
+<p>想要了解更多关于 Pandoc 命令行的用法，可以在 <a href="https://link.zhihu.com/?target=https://pandoc.org/MANUAL.html">Pandoc 官方说明文档</a> 中查看。</p>
+<p>你可以在 <a href="https://link.zhihu.com/?target=https://github.com/jgm/pandoc/releases/tag/2.1.3">Github</a> 下载 Pandoc。如果你喜欢通过 Chocolatey 安装软件，可以使用<code>choco install pandoc</code>这条命令进行安装。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="libowen.info/about/index.html" data-id="ckdr8tnm7000258vma6un9n55" class="article-share-link">分享</a>
+      <a data-url="libowen.info/2020/08/12/archives/pandocuse/" data-id="ckdr8tnmd000858vm7sgd9izv" class="article-share-link">分享</a>
       
       
       
@@ -156,6 +174,16 @@
   </div>
 
     
+<nav id="article-nav">
+  
+  
+    <a href="/2020/08/09/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">个人博客初章</div>
+    </a>
+  
+</nav>
+
   
 </article>
  
@@ -216,6 +244,13 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title archive">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">11</span></li></ul>
+    </div>
+  </div>
+
 
   
     

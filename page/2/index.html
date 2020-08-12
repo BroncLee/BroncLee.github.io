@@ -3,17 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>关于我想对你说的话 | 李博文的个人博客</title>
+  <title>李博文的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我会在这里分享我的学习心得，坚持每天都有所成长，技术方面也好，其他方面也好。 总有人，山高路远，为你而来     可以打赏哦 哈哈哈嗝">
+  <meta name="description" content="Personal Blog">
 <meta property="og:type" content="website">
-<meta property="og:title" content="关于我想对你说的话">
-<meta property="og:url" content="libowen.info/about/index.html">
+<meta property="og:title" content="李博文的个人博客">
+<meta property="og:url" content="libowen.info/page/2/index.html">
 <meta property="og:site_name" content="李博文的个人博客">
-<meta property="og:description" content="我会在这里分享我的学习心得，坚持每天都有所成长，技术方面也好，其他方面也好。 总有人，山高路远，为你而来     可以打赏哦 哈哈哈嗝">
+<meta property="og:description" content="Personal Blog">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-08-09T06:02:49.000Z">
-<meta property="article:modified_time" content="2020-08-09T06:40:39.429Z">
 <meta property="article:author" content="Libowen">
 <meta property="article:tag" content="李博文">
 <meta name="twitter:card" content="summary">
@@ -71,12 +69,18 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="c语言-archives/C语言" class="article article-type-c语言" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/about/index.html" class="article-date">
-  <time datetime="2020-08-09T06:02:49.000Z" itemprop="datePublished">2020-08-09</time>
+    <a href="/2020/08/09/archives/C%E8%AF%AD%E8%A8%80/" class="article-date">
+  <time datetime="2020-08-09T03:41:38.000Z" itemprop="datePublished">2020-08-09</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT/">IT</a>►<a class="article-category-link" href="/categories/IT/C/">C</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -84,8 +88,8 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      关于我想对你说的话
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/09/archives/C%E8%AF%AD%E8%A8%80/">C入门基础知识汇总</a>
     </h1>
   
 
@@ -93,86 +97,36 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!-- Table of Contents -->
+        <h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><ul>
+<li>c语言是有<code>main</code>函数组成，<code>main</code>函数代表主函数c语言程序都是从主函数开始到主函数结束，<code>void</code>类型属于空类型大家写程序的话如果声明的<code>void</code>类型最后结尾不用加<code>return</code>返回，如果是<code>INT main</code> 就需要加<code>return</code></li>
+</ul>
         
-        <p>我会在这里分享我的学习心得，坚持每天都有所成长，技术方面也好，其他方面也好。</p>
-<p>总有人，山高路远，为你而来</p>
-<blockquote>
-<p>   可以打赏哦 哈哈哈嗝</p>
-</blockquote>
-
+          <p class="article-more-link">
+            <a href="/2020/08/09/archives/C%E8%AF%AD%E8%A8%80/#more">继续阅读全文 »</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="libowen.info/about/index.html" data-id="ckdr8tnm7000258vma6un9n55" class="article-share-link">分享</a>
+      <a data-url="libowen.info/2020/08/09/archives/C%E8%AF%AD%E8%A8%80/" data-id="ckdr8tnmx001758vm769xc3dk" class="article-share-link">分享</a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C</a></li></ul>
+
     </footer>
   </div>
   
-    
- 
-<script src="/jquery/jquery.min.js"></script>
-
-  <div id="random_posts">
-    <h2>推荐文章</h2>
-    <div class="random_posts_ul">
-      <script>
-          var random_count =1
-          var site = {BASE_URI:'/'};
-          function load_random_posts(obj) {
-              var arr=site.posts;
-              if (!obj) return;
-              // var count = $(obj).attr('data-count') || 6;
-              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
-              arr = arr.slice(0, random_count);
-              var html = '<ul>';
-            
-              for(var j=0;j<arr.length;j++){
-                var item=arr[j];
-                html += '<li><strong>' + 
-                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
-                (item.title || item.uri) + '</a></strong>';
-                if(item.excerpt){
-                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
-                }
-                html +='</li>';
-                
-              }
-              $(obj).html(html + '</ul>');
-          }
-          $('.random_posts_ul').each(function () {
-              var c = this;
-              if (!site.posts || !site.posts.length){
-                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
-              } 
-               else{
-                load_random_posts(c);
-              }
-          });
-      </script>
-    </div>
-  </div>
-
-    
-  
 </article>
  
-     
-  <div class="comments" id="comments">
-    
-     
-       
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-    
-       
-      
-      
-  </div>
- 
+
+
   
 
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 </section>
            
     <aside id="sidebar">
