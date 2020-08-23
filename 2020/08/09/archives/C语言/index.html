@@ -1,10 +1,683 @@
-extends layout/layout
 
-block page-content
-  article.article-main
-    h1.article-title= page.title
-    .article-meta
-      include includes/post-meta
-      +postMeta(page)
-    .article-content
-      != page.content
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>C入门基础知识汇总 - 李博文的个人博客</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+
+  
+  <meta name="keywords" content="undefined"> 
+  
+  <meta name="description" content="第一章
+c语言是有main函数组成，main函数代表主..."> 
+  
+  <meta name="author" content="Libowen"> 
+
+  
+    <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  
+  
+    <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  
+  
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  
+  
+    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_0sri83bhiv7.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        loadingImage: '/images/theme/loading.gif',
+      },
+      donate: {
+        enable: true,
+        alipay: 'https://pic.izhaoo.com/alipay.jpg',
+        wechat: 'https://pic.izhaoo.com/wechat.jpg'
+      },
+      motto: {
+        api: '',
+        default: '我在开了灯的床头下，想问问自己的心啊。'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        alwaysShow: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: true
+      }
+    }
+  </script>
+
+  
+
+  
+<meta name="generator" content="Hexo 5.0.0"></head>
+<body class="lock-screen">
+  <div class="loading"></div>
+  <nav class="menu">
+  <div class="menu-close">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <ul class="menu-content">
+    
+    
+    
+    
+    <li class="menu-item"><a href="/ " class="underline"> 首页</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/galleries " class="underline"> 摄影</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/archives " class="underline"> 归档</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/tags " class="underline"> 标签</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/categories " class="underline"> 分类</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/about " class="underline"> 关于</a></li>
+    
+  </ul>
+  <div class="menu-copyright"><p>Copyright© 2019-2020 | <a target="_blank" href="https://www.izhaoo.com">zhaoo</a> .AllRightsReserved</p></div>
+</nav>
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">C入门基础知识汇总</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>8月 09, 2020</span
+        class="post-info-item">
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>7903</span>
+    </div>
+  </div>
+</section>
+  <section class="main">
+    <section class="content">
+      <h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><ul>
+<li>c语言是有<code>main</code>函数组成，<code>main</code>函数代表主函数c语言程序都是从主函数开始到主函数结束，<code>void</code>类型属于空类型大家写程序的话如果声明的<code>void</code>类型最后结尾不用加<code>return</code>返回，如果是<code>INT main</code> 就需要加<code>return</code></li>
+</ul>
+<a id="more"></a>
+
+<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><ul>
+<li>c语言本身不提供输入输出语句，<code>scanf</code>和<code>print</code>，然后大家需要知道每个数据类型所占的字节，<code>char</code>类型占一个字节，<code>short</code> <code>int </code>2个字节，<code>int</code>整形是两个字节，<code>long int</code> 4个字节，<code>float</code>是4个字节，<code>double</code>是8个字节上面说的是针对16位操作系统，如果是32位操作系统<code>int</code>是4个字节</li>
+<li>c语言分为整形常量，实行常量，需要明确的是c语言的整形常量不包括二进制由字母数字下划线组成，开头不可以是数字，整形常量的后面可以跟<code>l L</code>代表<code>long int</code> 类型，也可以是<code>u</code>，实行常量记住一个口诀<code>e</code>前<code>e</code>后必有数<code>e</code>后必须为整数</li>
+</ul>
+<blockquote>
+<p>c语言严格区分大小写的，还有转义字符大家也许需要清楚，几个重要的，<code>\n</code>代表换行<code> \t</code>是一个<code>tab</code> 就是空大概5 6个空格这个特别注意因为在程序结果中是频繁出现的坑</p>
+</blockquote>
+<ul>
+<li><p><code>%d</code>是整形十进制的  <code>o</code>是八进制<code>x</code>是十六进制的，<code>u</code>为无符号十进制，<code>c</code>只能输出一个字符，<code>s</code>是字符串，<code>f</code>为<code>float</code>类型的一般需要保留6个小数<code>double</code>也是分<code>float</code>一样</p>
+</li>
+<li><p>C语言32个关键字，这个大家一般在程序都会遇到，在书的14页不用刻意记，这个关键字是不可以作为标识符的，但是<code>main scanf pinnt</code> 可以作为标识符这三个不属于关键字 都是引入的函数</p>
+</li>
+<li><p>字符常量是单引号引起来的，字符串常量是双引号引起来的，并且字符常量必须是单个字符，字符串包含多个字符一般在选择题出现让判断正误，例如<code>‘ab</code>’这样是错的他只能括起来一个，<code>“ab”</code>这个就是对的  ==一&gt;== 字符串是2个字节字符是1个因为字符串后面有\0，数字节的时候不要忘了\0</p>
+</li>
+</ul>
+<ul>
+<li>优先级的问题，从高到低依次是</li>
+</ul>
+<blockquote>
+<p> 单目运算符<br> 算数运算符<br> 移位运算符<br> 关系运算符<br> 位运算<br> 逻辑<br> 条件<br> 赋值<br> 逗号        </p>
+</blockquote>
+<ul>
+<li>依次 逗号是最低的优先级括号跟指向是最高的，这个主要考选择题的4则运算给你一个题让你计算但是需要按优先级计</li>
+</ul>
+<h2 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h2><ul>
+<li><p><code>putchar</code>函数这个函数是输出单个字符只能是单个字符不可以是字符串，也就是说用他的话只能输出单个字符，而<code>getchar</code>这个是输入单个字符并且没有参数例如 <code>getchar（）</code> 这样括号里面没有东西，跟他对应的是puts跟gets 这两个跟前两个的区别就是他们是输入输出字符串，那个<code>getchar</code>这个在选择题经常考判断正误，后面括号里给你加东西，</p>
+</li>
+<li><p><code>%d</code>代表十进制<code>%0</code>代表8进制<code>%x</code>代表16进制<code>%c</code>是输出单个字符，<code>%s</code>是字符串<code>%f</code>输出的话默认6个小数后面，然后就是这个比如<code> int a=254 printf（&quot;%5d&quot;,a）</code>;这个需要左补空格因为规定了5个长度而a只有3个左移补两个空格</p>
+<blockquote>
+<p>默认左对齐右补空格  ，<code>-</code>右对齐左补空格</p>
+<blockquote>
+<p>==三角形面积和二元一次方程求根==必须会</p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+<h2 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h2><ul>
+<li><p>循环的嵌套，<code>if</code>的话他配对的话就是跟最进的一个没有配对的<code>else</code>是一组的，还有<code>switch</code>语句，他的写法是<code>switch（表达式）&#123; case:&#125; </code>这个下午咱们遇到题了语音说，然后就是需要知道大小写转换A大写字母的ascll是65 小写是97他们相差32， 还有就是编程题闰年的条件他是能被4整除但是不能被100整除又能被400整除，就是<code>if（year%4 == 0&amp;&amp;year%100!=0||year%400 == 0）</code></p>
+</li>
+<li><p><code>scanf</code>函数的格式考察：<br>  注意该函数的第二个部分是<code>&amp;a</code> 这样的地址，不是a； 如何实现两个变量<code>x ，y</code>中数值的互换（要求背下来）<br>  不可以把<code> x=y ,y=x;</code> 要用中间变量<code> t=x；x=y；y=t。</code></p>
+</li>
+</ul>
+<h2 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h2><blockquote>
+<p>  特别要注意：c语言中是用非0表示逻辑真的，用0表示逻辑假的。<br>  1）关系表达式：<br>  表达式的数值只能为1（表示为真），或0（表示假）<br>  当关系的表达是为真的时候得到1。如 9&gt;8这个是真的，所以表达式的数值就是1；<br>  2）逻辑表达式：<br>  只能为1（表示为真），或0（表示假）<br>  a) 共有 <code> &amp;&amp; || ！</code>   三种逻辑运算符号。<br>  b)<code>！&gt;&amp;&amp;&gt;||</code>  优先的级别。<br>  c) 注意短路现象。考试比较喜欢考到。<br>  d) 要表示 x 是比0大，比10小的方法。<code>0&lt;X&lt;10</code>  是不可以的（一定记住）。<code>(0&lt;X)&amp;&amp;(X&lt;10)</code>  表示比0大比10小。</p>
+</blockquote>
+<ul>
+<li><p><code>while</code>  语句一般用于循环次数无法确定的时候  <code> do while</code>   这个至少循环依次<code> for</code>语句格式是 <code>for(;;)</code>   主要用于循环次数确定的语句这个自己写编程的时候会遇到</p>
+</li>
+<li><p>条件表达式：<br>　<code>表达式1 ？表达式2 ：表达式3 </code><br>　注意是当非0时候是表达式2的数值，当为0是就是表达式3的数值。<br>考试口诀：真前假后。</p>
+</li>
+<li><p><code>switch</code>语句：<br>a）一定要注意 有<code>break</code> 和没有<code>break</code>的差别，没有<code>break</code>时候，只要有一个<code>case</code>匹配了，剩下的都要执行，有<code>break</code>则是直接跳出了<code>switch</code>语句。<code>default</code>可以放在任何位置，也只起标号作用</p>
+<p>b）<code>for</code>循环当中必须是两个分号，千万不要忘记。<br>c）写程序的时候一定要注意，循环一定要有结束的条件，否则成了死循环。<br>d) <code>do-while()</code>循环的最后一个<code>while();</code>的分号一定不能够丢。</p>
+</li>
+<li><p><code>break </code>和 <code>continue</code>的差别<br>记忆方法：<br><code>break</code>：是打破的意思，（破了整个循环）所以看见<code>break</code>就退出整个一层循环。<br><code>continue</code>：是继续的意思，（继续循环运算），但是要结束本次循环，就是循环体内剩下的语句不再执行，跳到循环开始，然后判断循环条件，进行新一轮的循环。</p>
+<blockquote>
+<p>  然后这一章需要掌握的编程96页逆序数输出，97页百元百鸡的问题102页5.10程序举例哪个计算兔子的斐波那契数列问题还有103页求Π的近似值，104页输出一个逆序数的问题还有105页判断素数的几个方法106页求1的阶乘到100的阶乘，这个是考试经常考的编程的经典算法那个页书可能有差别你们看下你们的书</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h2><h3 id="一维数组的重要概念："><a href="#一维数组的重要概念：" class="headerlink" title="一维数组的重要概念："></a>一维数组的重要概念：</h3><p>对 <code>a[10]</code> 这个数组的讨论。 </p>
+<ul>
+<li><p>a 表示数组名，是第一个元素的地址，也就是元素 <code>a[0]</code>  的地址。 </p>
+</li>
+<li><p>a 是地址常量，所以只要出现  <code>a++ </code>，或者是  <code>a=a+2</code>  赋值的都是错误的    </p>
+<p>==<code>a+1</code>表示下一个紧挨着的元素  -&gt;  <code>a+1 = a[1]</code>==</p>
+</li>
+</ul>
+<blockquote>
+<p>  如果有 <code>a[3][3] =&#123;1,2,3,4,5,6,7,8,9&#125;</code>   这样的题目。<br>  步骤一：把他们写成：　　　　　         </p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">第一列</th>
+<th align="center">第二列</th>
+<th align="center">第三列</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">a[0]</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">第一行</td>
+</tr>
+<tr>
+<td align="center">a[1]</td>
+<td align="center">4</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">第二行</td>
+</tr>
+<tr>
+<td align="center">a[2]</td>
+<td align="center">7</td>
+<td align="center">8</td>
+<td align="center">9</td>
+<td align="center">第三行</td>
+</tr>
+</tbody></table>
+</blockquote>
+<p>1.一维数组比方说 <code>a[5]</code> 他有5个元素但是他是从0开始的就是包含 <code>a[0] a[1] a[2] a[3] a[4]</code>  5个元素，  </p>
+<p>2.数组名不可以跟其他变量名相同  </p>
+<p>3.数组名代表数组的首地址就是  <code>a</code> 的值跟 <code>a[0]</code> 的值相同</p>
+<p>4.例如 <code>int n,a[10]=&#123;3*n&#125;;</code> 这个是错误的 因为n的值不确定不可以这样进行赋值 。   <code> int a[3.5],a[0];</code>这也是错误的写法</p>
+<p>5.如果定义 <code>int a[10];</code> 然后给出了选项让判断正确 比如 <code>a[10] a[9]</code> 这个肯定是<code>a[9]</code> 对 <code>a[10]</code> 会出现越界</p>
+<p>6.一维数组的下标可以省略，例如 <code>int a[]</code> 这样也是对的   </p>
+<p>7.还有一种情况就是 <code>a[5]=&#123;0,1,2,3,4,5&#125;</code>这个编译时会出现错误</p>
+<h3 id="二维数组做题目的技巧："><a href="#二维数组做题目的技巧：" class="headerlink" title="二维数组做题目的技巧："></a>二维数组做题目的技巧：</h3><blockquote>
+<p>  如果有  <code>a[3][3]=&#123;1,2,3,4,5,6,7,8,9&#125;</code> 这样的题目。<br>  步骤一：把他们写成：　　　　　 </p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">第一列</th>
+<th align="center">第二列</th>
+<th align="center">第三列</th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">a[0]</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">第一行</td>
+</tr>
+<tr>
+<td align="center">a[1]</td>
+<td align="center">4</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">第二行</td>
+</tr>
+<tr>
+<td align="center">a[2]</td>
+<td align="center">7</td>
+<td align="center">8</td>
+<td align="center">9</td>
+<td align="center">第三行</td>
+</tr>
+</tbody></table>
+<p>  步骤二：这样作题目间很简单：　　　　<br>  <code>*(a[0]+1)</code> 我们就知道是第一行的第一个元素往后面跳一列，那么这里就是 <code>a[0][1]</code> 元素，所以是2。<br>  <code>*(a[1]+2)</code> 我们就知道是第二行的第一个元素往后面跳两列。那么这里就是 <code>a[1][2]</code>元素，所以是6。</p>
+</blockquote>
+<p>==<strong>一定记住：只要是二维数组的题目，一定是写成如上的格式，再去做题目，这样会比较简单</strong>==。 </p>
+<p>数组的初始化，一维和二维的，==一维可以不写，二维第二个一定要写==<br><code>int a[]=&#123;1，2&#125;</code> 合法。<code>int a[][4]=&#123;2，3，4&#125;</code> 合法。 但 <code>int a[4][]=&#123;2，3，4&#125;</code>非法。</p>
+<p>二维数组比如 <code>int a[2][3]</code> 代表他有2行3列  并且行跟列都是从0开始的， 还有就是字符数组，他的定义为 <code>char a[2][3]</code></p>
+<h3 id="字符处理函数"><a href="#字符处理函数" class="headerlink" title="字符处理函数"></a>字符处理函数</h3><p>==要引入字符串函数头文件 <code>string.h</code>==</p>
+<ol>
+<li><p><code>strcat(字符数组名1，字符数组名2)</code> 字符串连接函数 </p>
+<blockquote>
+<p>  C 库函数  <code>char *strcat(char *dest, const char *src) </code>把 <code>src</code> 所指向的字符串追加到 <code>dest</code> 所指向的字符串的结尾。</p>
+<p>  该函数返回一个指向最终的目标字符串 <code>dest</code> 的指针。</p>
+</blockquote>
+<ul>
+<li>比如 <code>char a[10]=&quot;abc&quot;;char b[10]=&quot;bcd&quot;</code>  然后 <code>strcat(a,b)</code> 现在 <code>a</code> 会变成 <code>abcbcd</code></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">char</span> src[<span class="number">50</span>], dest[<span class="number">50</span>];</span><br><span class="line"> </span><br><span class="line">   <span class="built_in">strcpy</span>(src,  <span class="string">&quot;This is source&quot;</span>);</span><br><span class="line">   <span class="built_in">strcpy</span>(dest, <span class="string">&quot;This is destination&quot;</span>);</span><br><span class="line"> </span><br><span class="line">   <span class="built_in">strcat</span>(dest, src);</span><br><span class="line"> </span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;最终的目标字符串： |%s|&quot;</span>, dest);</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">return</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 运行结果</span></span><br><span class="line"><span class="comment">* 最终的目标字符串： |This is destinationThis is source|</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p><code>strcpy(字符数组名1，字符数组名2)</code>  字符串复制函数</p>
+<blockquote>
+<p>  C 库函数 <code>char *strcpy(char *dest, const char *src)</code> 把 <code>src</code> 所指向的字符串复制到 <code>dest</code>。</p>
+<p>  需要注意的是如果目标数组 <code>dest</code> 不够大，而源字符串的长度又太长，可能会造成缓冲溢出的情况。</p>
+<ul>
+<li><p><code>dest</code> – 指向用于存储复制内容的目标数组。</p>
+</li>
+<li><p><code>src</code> – 要复制的字符串。</p>
+<p>该函数返回一个指向最终的目标字符串 <code>dest</code> 的指针。</p>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>执行步骤跟上面一样就是拿上面哪个来说 <code>strcpy(a,b)</code> <code>a</code> 会变为 <code>bcd</code></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> str1[]=<span class="string">&quot;Sample string&quot;</span>;</span><br><span class="line">  <span class="keyword">char</span> str2[<span class="number">40</span>];</span><br><span class="line">  <span class="keyword">char</span> str3[<span class="number">40</span>];</span><br><span class="line">  <span class="built_in">strcpy</span> (str2,str1);</span><br><span class="line">  <span class="built_in">strcpy</span> (str3,<span class="string">&quot;copy successful&quot;</span>);</span><br><span class="line">  <span class="built_in">printf</span> (<span class="string">&quot;str1: %s\nstr2: %s\nstr3: %s\n&quot;</span>,str1,str2,str3);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 运行结果</span></span><br><span class="line"><span class="comment">* str1: Sample string</span></span><br><span class="line"><span class="comment">* str2: Sample string</span></span><br><span class="line"><span class="comment">* str3: copy successful</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p><code>strlen</code> 测字符串的长度，</p>
+<ul>
+<li><p>这个主要会出选择题让你测字符串长度 </p>
+</li>
+<li><p>比如 <code>char a[6]=&quot;abc&quot; </code>他的长度为3，但是他的字符个数为4，因为字符串有个 <code>\0 </code>结尾</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">char</span> str[<span class="number">50</span>];</span><br><span class="line">   <span class="keyword">int</span> len;</span><br><span class="line"></span><br><span class="line">   <span class="built_in">strcpy</span>(str, <span class="string">&quot;This is runoob.com&quot;</span>);</span><br><span class="line"></span><br><span class="line">   len = <span class="built_in">strlen</span>(str);</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">&quot;|%s| 的长度是 |%d|\n&quot;</span>, str, len);</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">return</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 运行结果</span></span><br><span class="line"><span class="comment">* |This is runoob.com| 的长度是 |18|</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>strcmp(字符串1，字符串2)</code></p>
+<p>字符串相等，返回0<br>字符串1&gt;字符串2，返回值大于0<br>字符串1&lt;字符串2，返回值小于0</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">char</span> str1[<span class="number">15</span>];</span><br><span class="line">   <span class="keyword">char</span> str2[<span class="number">15</span>];</span><br><span class="line">   <span class="keyword">int</span> ret;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">   <span class="built_in">strcpy</span>(str1, <span class="string">&quot;abcdef&quot;</span>);</span><br><span class="line">   <span class="built_in">strcpy</span>(str2, <span class="string">&quot;ABCDEF&quot;</span>);</span><br><span class="line"> </span><br><span class="line">   ret = <span class="built_in">strcmp</span>(str1, str2);</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">if</span>(ret &lt; <span class="number">0</span>)</span><br><span class="line">   &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;str1 小于 str2&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">else</span> <span class="keyword">if</span>(ret &gt; <span class="number">0</span>) </span><br><span class="line">   &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;str1 大于 str2&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">else</span> </span><br><span class="line">   &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;str1 等于 str2&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">return</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* str1 大于 str2</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ol>
+<blockquote>
+<p>  6.1.4 求最大值 p133  </p>
+<p>  6.1.5 用数组处理斐波那契额数列 p133 </p>
+<p>  6.2.8 冒泡排序 选择排序  p135</p>
+<p>  6.3.3 行列互换 p143</p>
+<p>  6.5.3 杨辉三角形  p161</p>
+<p>  6.4.8 不用库函数实现复制  p161</p>
+</blockquote>
+<h2 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h2><ol>
+<li><p>函数的调用时的实参可以是常量变量表达式  </p>
+</li>
+<li><p>函数如果声明的是int类型就必须有 <code>return</code>返回值 </p>
+</li>
+<li><p>不返回函数值的函数可以明确为空类型，即 <code>void</code></p>
+</li>
+<li><p>函数的返回值只能有一个但是 <code>return</code>语句可以有多个</p>
+</li>
+<li><p>二维数组作为函数形参时，只有一维的大小可以省略，第二维的大小必须指定</p>
+</li>
+<li><p>函数不可以嵌套定义但可以嵌套调用</p>
+</li>
+<li><p>一个函数即可以被其他函数调用也可以调用其他函数，这就是函数嵌套调用</p>
+</li>
+<li><p>只能在本源程序中使用的全局变量为static </p>
+</li>
+<li><p>自动类auto 静态类static 寄存器类register 还有外部extern变量</p>
+</li>
+</ol>
+<blockquote>
+<p>  函数不能通过返回指向栈内存的指针(注意这里指的是栈，返回指向堆内存的指针是可以的)。</p>
+</blockquote>
+<p><code>malloc()</code>申请内存 在堆里 </p>
+<p><code>free()</code>释放内存</p>
+<blockquote>
+<p>  7.2.2  用函数求阶乘  p173</p>
+<p>  7.4.4  用函数排序      p184</p>
+<p>  7.9.1 回文                      p210</p>
+<p>  7.9.2 完数指针             p211</p>
+<p>  这章不涉及编程考试应该不会出的，大佬的话可以写一下那4个函数的编程用指针 就是复制连接长度比较</p>
+</blockquote>
+<h2 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h2><ul>
+<li>指针变量的本质是用来放地址，而一般的变量是放数值的。<br><code>int *p</code> 中<code> *p</code>和<code>p</code>的差别：<br><code>*p</code>可以当做变量来用；<code>*</code>的作用是取后面地址<code>p</code>里面的数值<br><code>p</code>是当作地址来使用。</li>
+</ul>
+<blockquote>
+<p>  <code>*p++</code> 和 <code>（*p）++</code>的之间的差别：==改错题目中很重要==<br>  <code>*p++</code>是 地址会变化。<br>  <code>(*p)++</code> 是数值会要变化。</p>
+<p>  <code>p == &amp;*p</code></p>
+</blockquote>
+<ul>
+<li>==三名主义：（考试的重点)==<ul>
+<li>数组名：表示第一个元素的地址。数组名不可以自加，他是地址常量名。（考了很多次） </li>
+<li>函数名：表示该函数的入口地址。 </li>
+<li>字符串常量名：表示第一个字符的地址。</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><p>只有指向==同一数组==的两个指针变量之间才能运算，否则毫无意义，可以进行==减法运算但是不能加==，比如<code>p1+p2</code>是没有意义的</p>
+</li>
+<li><p>设<code>p</code>为指针变量，则 <code>p==0</code> 表示<code>p</code>为空指针，他不指向任何变量</p>
+</li>
+<li><p>前提条件<code>p=a</code>地址<code> &amp;a[i] a+i</code>  元素 <code>a[i]  *(a+i)</code>   这个会出选择题让你看他是元素还是地址</p>
+</li>
+<li><p><code>int *pa[3]</code> 这个的意思就是表示一个指针数组，他有3个数组元素，每个元素值都是一个指针，指向整型变量</p>
+</li>
+<li><p><code>int (*pa)[3]</code>  这个的意思是<code>pa</code>为指向含 <code>n</code>个元素的一维数组的指针变量</p>
+</li>
+</ol>
+<blockquote>
+<p>  4  5这个的话属于定义会直接考选择题，就考这个定义</p>
+</blockquote>
+<h2 id="第九、十章"><a href="#第九、十章" class="headerlink" title="第九、十章"></a>第九、十章</h2><ol>
+<li></li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stu</span></span></span><br><span class="line"><span class="class">    &#123;</span></span><br><span class="line">        <span class="keyword">int</span> num;</span><br><span class="line">        <span class="keyword">char</span> name a[<span class="number">20</span>];</span><br><span class="line">        <span class="keyword">char</span> sex;</span><br><span class="line">        <span class="keyword">float</span> score;</span><br><span class="line">     &#125;boy1;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<p> 这个引用的一般格式就是结构体变量名.成员名  即 <code>boy1.num</code> 就是第一个人的学号</p>
+<ol start="2">
+<li><p>如果是指向结构体变量的指针，有三种定义方法 </p>
+<p>1.变量名.成员名 </p>
+<p>2.(*指针名).成员名 </p>
+<p>3.指针名-&gt;成员名</p>
+</li>
+<li><p>共用体的话是跟上面结构体一样的就是把<code>struct</code>改成<code>union</code>,然后共用体只考一个定义就是共用体变量所占内存长度等于最长的成员的长度，而结构体是所有的长度加起来的总和</p>
+</li>
+<li><p>然后说下宏定义，这个最主要的一个就是原样替换，先说下定义，题的话我下午出一个，定义是如果不是特殊需要预处理的语句的结尾不应该有分号，如果语句末尾加分号，则连同分号一起替换</p>
+</li>
+</ol>
+<blockquote>
+<p>  补充一个东西就是如果出现数学函数开平方之类的要声明<code>include&lt;math.h&gt;</code>  如果要用到<code>strlen strcmp</code> 复制连接4个函数就需要声明 <code>include&lt;string.h&gt;</code></p>
+</blockquote>
+
+    </section>
+    <section class="extra">
+      
+        <ul class="copyright">
+  
+  <li><strong>本文作者：</strong>Libowen</li>
+  <li><strong>本文链接：</strong><a href="libowen.info/2020/08/09/archives/C%E8%AF%AD%E8%A8%80/index.html">libowen.info/2020/08/09/archives/C%E8%AF%AD%E8%A8%80/index.html</a></li>
+  <li><strong>版权声明：</strong>本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
+      rel="external nofollow" target="_blank"> BY-NC-SA </a>许可协议，转载请注明出处！</li>
+  
+</ul>
+      
+      
+        <section class="donate">
+  <div class="qrcode">
+    <img   class="lazyload" data-original="https://pic.izhaoo.com/alipay.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+      
+      
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li></ul>
+
+      
+<nav class="nav">
+  
+    <a href="/2020/08/09/archives/func/"><i class="iconfont iconleft"></i>四个字符串函数源码</a>
+  
+  
+</nav>
+
+    </section>
+    
+      <section class="comments">
+        
+          <div class="btn" id="comments-btn">查看评论</div>
+        
+        
+      </section>
+    
+  </section>
+</article>
+  </div>
+</main>
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=894519210 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://www.instagram.com/izhaoo/ " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconinstagram "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/izhaoo " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:izhaoo@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>Copyright© 2019-2020 | <a target="_blank" href="https://www.izhaoo.com">zhaoo</a> .AllRightsReserved</p></div>
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  <div class="fab fab-daovoice">
+    <i class="iconfont iconcomment"></i>
+  </div>
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  <div class="fab fab-menu">
+    <i class="iconfont iconmenu"></i>
+  </div>
+  
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/modules.js"></script>
+<script src="/js/zui.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i["DaoVoiceObject"] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    a.charset = "utf-8";
+    m.parentNode.insertBefore(a, m)
+  })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+    "//widget.daovoice.io/widget/0f81ff2f.js", "daovoice")
+  daovoice('init', {
+    app_id: "abcdefg"
+  }, {
+    launcher: {
+      disableLauncherIcon: true,
+    },
+  });
+  daovoice('update');
+</script>
+
+
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4c204d8bc027a0455b5fc642ac334ca8";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+</html>
