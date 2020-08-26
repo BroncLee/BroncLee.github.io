@@ -13,7 +13,7 @@
   <meta name="google" content="notranslate" />
 
   
-  <meta name="keywords" content="undefined"> 
+  <meta name="keywords" content="李博文"> 
   
   <meta name="description" content="Promise 对象1. Promise的含义
 Pro..."> 
@@ -30,7 +30,7 @@ Pro...">
     <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
   
   
-    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+    <meta rel="mask-icon" href="/images/icons/zhaoo-logo.png" color="#333333">
   
   
     <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
@@ -85,7 +85,7 @@ Pro...">
       },
       motto: {
         api: '',
-        default: '我在开了灯的床头下，想问问自己的心啊。'
+        default: '还好 还好 还好我们遇见过 。'
       },
       galleries: {
         enable: true
@@ -146,13 +146,13 @@ Pro...">
     <li class="menu-item"><a href="/about " class="underline"> 关于</a></li>
     
   </ul>
-  <div class="menu-copyright"><p>Copyright© 2019-2020 | <a target="_blank" href="https://www.izhaoo.com">zhaoo</a> .AllRightsReserved</p></div>
+  <div class="menu-copyright"><p>还好 还好 还好遇见过你</p></div>
 </nav>
   <main id="main">
   <div class="container" id="container">
     <article class="article">
   <section class="head">
-  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
   <div class="head-mask">
     <h1 class="head-title"> ES6异步通信Promise </h1>
     <div class="head-info">
@@ -181,23 +181,23 @@ Pro...">
 <h2 id="2-基本用法"><a href="#2-基本用法" class="headerlink" title="2.基本用法"></a>2.基本用法</h2><ul>
 <li>ES6 规定，<code>Promise</code>对象是一个构造函数，用来生成<code>Promise</code>实例。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ... some code</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="comment">/* 异步操作成功 */</span>)&#123;</span><br><span class="line">    resolve(value);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    reject(error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> promise = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>&#123;<br>  <span class="hljs-comment">// ... some code</span><br><br>  <span class="hljs-keyword">if</span> (<span class="hljs-comment">/* 异步操作成功 */</span>)&#123;<br>    resolve(value);<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    reject(error);<br>  &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
 
 <p><code>Promise</code>构造函数接受一个函数作为参数，该函数的两个参数分别是<code>resolve</code>和<code>reject</code>。它们是两个函数，由 JavaScript 引擎提供，不用自己部署。</p>
 <p><code>resolve</code>函数的作用是，将<code>Promise</code>对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；<code>reject</code>函数的作用是，将<code>Promise</code>对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。</p>
 <p><code>Promise</code>实例生成以后，可以用<code>then</code>方法分别指定<code>resolved</code>状态和<code>rejected</code>状态的回调函数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">promise.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 成功</span></span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 失败</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript">promise.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>) </span>&#123;<br>  <span class="hljs-comment">// 成功</span><br>&#125;, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>) </span>&#123;<br>  <span class="hljs-comment">// 失败</span><br>&#125;);<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li>then方法可以接受两个回调函数作为参数。第一个回调函数是Promise对象的状态变为resolved时调用，第二个回调函数是Promise对象的状态变为rejected时调用。其中，第二个函数是可选的，不一定要提供。这两个函数都接受Promise对象传出的值作为参数。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">timeout</span>(<span class="params">ms</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(resolve, ms, <span class="string">&#x27;done&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">timeout(<span class="number">5000</span>).then(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">timeout</span>(<span class="hljs-params">ms</span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>        <span class="hljs-built_in">setTimeout</span>(resolve, ms, <span class="hljs-string">&#x27;done&#x27;</span>);<br>    &#125;);<br>&#125;<br><br>timeout(<span class="hljs-number">5000</span>).then(<span class="hljs-function">(<span class="hljs-params">value</span>) =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(value);<br>&#125;);<br></code></pre></td></tr></table></figure>
 
 <p>上面代码中，<code>timeout</code>方法返回一个<code>Promise</code>实例，表示一段时间以后才会发生的结果。过了指定的时间（<code>ms</code>参数）以后，<code>Promise</code>实例的状态变为<code>resolved</code>，就会触发<code>then</code>方法绑定的回调函数。</p>
 <hr>
 <h2 id="3-Promise-prototype-then"><a href="#3-Promise-prototype-then" class="headerlink" title="3.Promise.prototype.then()"></a>3.Promise.prototype.then()</h2><p>Promise 实例具有<code>then</code>方法，也就是说，<code>then</code>方法是定义在原型对象<code>Promise.prototype</code>上的。它的作用是为 Promise 实例添加状态改变时的回调函数。前面说过，<code>then</code>方法的第一个参数是<code>resolved</code>状态的回调函数，第二个参数（可选）是<code>rejected</code>状态的回调函数。</p>
 <p><code>then</code>方法返回的是一个新的<code>Promise</code>实例（注意，不是原来那个<code>Promise</code>实例）。因此可以采用链式写法，即<code>then</code>方法后面再调用另一个<code>then</code>方法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">getJSON(<span class="string">&quot;/post/1.json&quot;</span>).then(</span><br><span class="line">  post =&gt; getJSON(post.commentURL)</span><br><span class="line">).then(</span><br><span class="line">  comments =&gt; <span class="built_in">console</span>.log(<span class="string">&quot;resolved: &quot;</span>, comments),</span><br><span class="line">  err =&gt; <span class="built_in">console</span>.log(<span class="string">&quot;rejected: &quot;</span>, err)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript">getJSON(<span class="hljs-string">&quot;/post/1.json&quot;</span>).then(<br>  post =&gt; getJSON(post.commentURL)<br>).then(<br>  comments =&gt; <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;resolved: &quot;</span>, comments),<br>  err =&gt; <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;rejected: &quot;</span>, err)<br>);<br></code></pre></td></tr></table></figure>
 
 <p>then 方法中前一个回调函数的返回值可以传递给下一个回调函数。</p>
 
@@ -257,7 +257,7 @@ Pro...">
     
     
     
-    <a href="tencent://message/?Menu=yes&uin=894519210 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+    <a href="tencent://message/?Menu=yes&uin=1609828358 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
       onMouseOut="this.style.color='#33333D'">
       <i class="iconfont footer-social-item  iconQQ "></i>
     </a>
@@ -275,7 +275,7 @@ Pro...">
     
     
     
-    <a href="https://www.instagram.com/izhaoo/ " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
+    <a href="jsvascript:; " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
       onMouseOut="this.style.color='#33333D'">
       <i class="iconfont footer-social-item  iconinstagram "></i>
     </a>
@@ -284,7 +284,7 @@ Pro...">
     
     
     
-    <a href="https://github.com/izhaoo " target="_blank" onMouseOver="this.style.color= '#24292E'"
+    <a href="https://github.com/BroncLee " target="_blank" onMouseOver="this.style.color= '#24292E'"
       onMouseOut="this.style.color='#33333D'">
       <i class="iconfont footer-social-item  icongithub-fill "></i>
     </a>
@@ -293,13 +293,13 @@ Pro...">
     
     
     
-    <a href="mailto:izhaoo@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+    <a href="mailto:leebw529@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
       onMouseOut="this.style.color='#33333D'">
       <i class="iconfont footer-social-item  iconmail"></i>
     </a>
     
   </div>
-  <div class="footer-copyright"><p>Copyright© 2019-2020 | <a target="_blank" href="https://www.izhaoo.com">zhaoo</a> .AllRightsReserved</p></div>
+  <div class="footer-copyright"><p>还好 还好 还好遇见过你</p></div>
 </footer>
   
       <div class="fab fab-plus">

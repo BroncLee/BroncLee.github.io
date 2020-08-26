@@ -13,7 +13,7 @@
   <meta name="google" content="notranslate" />
 
   
-  <meta name="keywords" content="undefined"> 
+  <meta name="keywords" content="李博文"> 
   
   <meta name="description" content="  一般的来说，函数是可以返回局部变量的。 局部变量的..."> 
   
@@ -29,7 +29,7 @@
     <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
   
   
-    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+    <meta rel="mask-icon" href="/images/icons/zhaoo-logo.png" color="#333333">
   
   
     <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
@@ -84,7 +84,7 @@
       },
       motto: {
         api: '',
-        default: '我在开了灯的床头下，想问问自己的心啊。'
+        default: '还好 还好 还好我们遇见过 。'
       },
       galleries: {
         enable: true
@@ -145,13 +145,13 @@
     <li class="menu-item"><a href="/about " class="underline"> 关于</a></li>
     
   </ul>
-  <div class="menu-copyright"><p>Copyright© 2019-2020 | <a target="_blank" href="https://www.izhaoo.com">zhaoo</a> .AllRightsReserved</p></div>
+  <div class="menu-copyright"><p>还好 还好 还好遇见过你</p></div>
 </nav>
   <main id="main">
   <div class="container" id="container">
     <article class="article">
   <section class="head">
-  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
   <div class="head-mask">
     <h1 class="head-title">函数返回值浅谈</h1>
     <div class="head-info">
@@ -169,15 +169,15 @@
 <a id="more"></a>
 
 <p>1：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt; </span></span></span><br><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">returnStr</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">char</span> *p=<span class="string">&quot;hello world!&quot;</span>; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> p; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">char</span> *str; </span><br><span class="line"></span><br><span class="line">    str=returnStr(); </span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, str); </span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt; </span></span><br><span class="hljs-function"><span class="hljs-keyword">char</span> *<span class="hljs-title">returnStr</span><span class="hljs-params">()</span> </span><br><span class="hljs-function"></span>&#123; <br>    <span class="hljs-keyword">char</span> *p=<span class="hljs-string">&quot;hello world!&quot;</span>; <br><br>    <span class="hljs-keyword">return</span> p; <br>&#125; <br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span><br><span class="hljs-function"></span>&#123; <br>    <span class="hljs-keyword">char</span> *str; <br><br>    str=returnStr(); <br><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>, str); <br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>这个没有任何问题，因为”hello world!”是一个字符串常量，存放在只读数据段，把该字符串常量存放的只读数据段的首地址赋值给了指针，所以returnStr函数退出时，该该字符串常量所在内存不会被回收，故能够通过指针顺利无误的访问。</p>
 <p>2：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include <span class="tag">&lt;<span class="name">stdio.h</span>&gt;</span> </span><br><span class="line">char *returnStr() </span><br><span class="line">&#123; </span><br><span class="line">    char p[]=&quot;hello world!&quot;; </span><br><span class="line"></span><br><span class="line">    return p; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">int main() </span><br><span class="line">&#123; </span><br><span class="line">    char *str; </span><br><span class="line"></span><br><span class="line">    str=returnStr(); </span><br><span class="line"></span><br><span class="line">    printf(&quot;%s\n&quot;, str); </span><br><span class="line"></span><br><span class="line">    return 0; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs html">#include <span class="hljs-tag">&lt;<span class="hljs-name">stdio.h</span>&gt;</span> <br>char *returnStr() <br>&#123; <br>    char p[]=&quot;hello world!&quot;; <br><br>    return p; <br>&#125; <br><br>int main() <br>&#123; <br>    char *str; <br><br>    str=returnStr(); <br><br>    printf(&quot;%s\n&quot;, str); <br><br>    return 0; <br>&#125; <br></code></pre></td></tr></table></figure>
 
 <p>“hello world!”是局部变量存放在栈中。当returnStr函数退出时，栈要清空，局部变量的内存也被清空了，所以这时的函数返回的是一个已被释放的内存地址，所以有可能打印出来的是乱码。 </p>
 <p>3：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">int func()</span><br><span class="line">&#123;</span><br><span class="line">      int a;</span><br><span class="line"></span><br><span class="line">     ....</span><br><span class="line"></span><br><span class="line">      return a;    //允许</span><br><span class="line">&#125;      </span><br><span class="line"></span><br><span class="line">int * func()</span><br><span class="line">&#123;</span><br><span class="line">      int a;</span><br><span class="line"></span><br><span class="line">     ....</span><br><span class="line"></span><br><span class="line">      return <span class="symbol">&amp;a;</span>    //无意义，不应该这样做</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs html">int func()<br>&#123;<br>      int a;<br><br>     ....<br><br>      return a;    //允许<br>&#125;      <br><br>int * func()<br>&#123;<br>      int a;<br><br>     ....<br><br>      return <span class="hljs-symbol">&amp;a;</span>    //无意义，不应该这样做<br>&#125; <br></code></pre></td></tr></table></figure>
 
 
 
@@ -186,13 +186,13 @@
 <p>被抛弃，这个指针指向一个不再存在的对象，是无意义的。但可以返回指向局部静态变量的指针，因为静态变量的生存</p>
 <p>期从定义起到程序结束。</p>
 <p>4：如果函数的返回值非要是一个局部变量的地址，那么该局部变量一定要申明为static类型。如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include <span class="tag">&lt;<span class="name">stdio.h</span>&gt;</span> </span><br><span class="line">char *returnStr() </span><br><span class="line">&#123; </span><br><span class="line">    static char p[]=&quot;hello world!&quot;; </span><br><span class="line"></span><br><span class="line">    return p; </span><br><span class="line">&#125; </span><br><span class="line">    </span><br><span class="line">int main() </span><br><span class="line">&#123; </span><br><span class="line">    char *str; </span><br><span class="line"></span><br><span class="line">    str=returnStr(); </span><br><span class="line"></span><br><span class="line">    printf(&quot;%s\n&quot;, str); </span><br><span class="line"></span><br><span class="line">    return 0; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs html">#include <span class="hljs-tag">&lt;<span class="hljs-name">stdio.h</span>&gt;</span> <br>char *returnStr() <br>&#123; <br>    static char p[]=&quot;hello world!&quot;; <br><br>    return p; <br>&#125; <br>    <br>int main() <br>&#123; <br>    char *str; <br><br>    str=returnStr(); <br><br>    printf(&quot;%s\n&quot;, str); <br><br>    return 0; <br>&#125; <br></code></pre></td></tr></table></figure>
 
 <p>5： 数组是不能作为函数的返回值的，原因是编译器把数组名认为是局部变量（数组）的地址。返回一个数组一般用返回指向这个数组的指针代替，而且这个指针不能指向一个自动数组，因为函数结束后自动数组被抛弃，但可以返回一个指向静态局部数组的指针，因为静态存储期是从对象定义到程序结束的。如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int* func( void )</span><br><span class="line">&#123;</span><br><span class="line">    static int a[10];</span><br><span class="line"></span><br><span class="line">    ........</span><br><span class="line"></span><br><span class="line">    return a;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs html">int* func( void )<br>&#123;<br>    static int a[10];<br><br>    ........<br><br>    return a;<br>&#125; <br></code></pre></td></tr></table></figure>
 
 <p>6：返回指向堆内存的指针是可以的</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">char *GetMemory3(int num)</span><br><span class="line">&#123;</span><br><span class="line">    char *p = (char *)malloc(sizeof(char) * num);</span><br><span class="line"></span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void Test3(void)</span><br><span class="line">&#123;</span><br><span class="line">    char *str = NULL;</span><br><span class="line"></span><br><span class="line">    str = GetMemory3(100);</span><br><span class="line"></span><br><span class="line">    strcpy(str, &quot;hello&quot;);</span><br><span class="line"></span><br><span class="line">    cout&lt;&lt; str &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    free(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs html">char *GetMemory3(int num)<br>&#123;<br>    char *p = (char *)malloc(sizeof(char) * num);<br><br>    return p;<br>&#125;<br><br>void Test3(void)<br>&#123;<br>    char *str = NULL;<br><br>    str = GetMemory3(100);<br><br>    strcpy(str, &quot;hello&quot;);<br><br>    cout&lt;&lt; str &lt;&lt; endl;<br><br>    free(str);<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>程序在运行的时候用 malloc 申请任意多少的内存,程序员自己负责在何时用 free释放内存。动态内存的生存期由程序员自己决定,使用非常灵活。</p>
 
@@ -252,7 +252,7 @@
     
     
     
-    <a href="tencent://message/?Menu=yes&uin=894519210 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+    <a href="tencent://message/?Menu=yes&uin=1609828358 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
       onMouseOut="this.style.color='#33333D'">
       <i class="iconfont footer-social-item  iconQQ "></i>
     </a>
@@ -270,7 +270,7 @@
     
     
     
-    <a href="https://www.instagram.com/izhaoo/ " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
+    <a href="jsvascript:; " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
       onMouseOut="this.style.color='#33333D'">
       <i class="iconfont footer-social-item  iconinstagram "></i>
     </a>
@@ -279,7 +279,7 @@
     
     
     
-    <a href="https://github.com/izhaoo " target="_blank" onMouseOver="this.style.color= '#24292E'"
+    <a href="https://github.com/BroncLee " target="_blank" onMouseOver="this.style.color= '#24292E'"
       onMouseOut="this.style.color='#33333D'">
       <i class="iconfont footer-social-item  icongithub-fill "></i>
     </a>
@@ -288,13 +288,13 @@
     
     
     
-    <a href="mailto:izhaoo@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+    <a href="mailto:leebw529@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
       onMouseOut="this.style.color='#33333D'">
       <i class="iconfont footer-social-item  iconmail"></i>
     </a>
     
   </div>
-  <div class="footer-copyright"><p>Copyright© 2019-2020 | <a target="_blank" href="https://www.izhaoo.com">zhaoo</a> .AllRightsReserved</p></div>
+  <div class="footer-copyright"><p>还好 还好 还好遇见过你</p></div>
 </footer>
   
       <div class="fab fab-plus">

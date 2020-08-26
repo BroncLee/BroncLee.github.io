@@ -13,7 +13,7 @@
   <meta name="google" content="notranslate" />
 
   
-  <meta name="keywords" content="undefined"> 
+  <meta name="keywords" content="李博文"> 
   
   <meta name="description" content="什么是认证（Authentication）
 通俗地讲就..."> 
@@ -30,7 +30,7 @@
     <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
   
   
-    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+    <meta rel="mask-icon" href="/images/icons/zhaoo-logo.png" color="#333333">
   
   
     <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
@@ -85,7 +85,7 @@
       },
       motto: {
         api: '',
-        default: '我在开了灯的床头下，想问问自己的心啊。'
+        default: '还好 还好 还好我们遇见过 。'
       },
       galleries: {
         enable: true
@@ -146,13 +146,13 @@
     <li class="menu-item"><a href="/about " class="underline"> 关于</a></li>
     
   </ul>
-  <div class="menu-copyright"><p>Copyright© 2019-2020 | <a target="_blank" href="https://www.izhaoo.com">zhaoo</a> .AllRightsReserved</p></div>
+  <div class="menu-copyright"><p>还好 还好 还好遇见过你</p></div>
 </nav>
   <main id="main">
   <div class="container" id="container">
     <article class="article">
   <section class="head">
-  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <img   class="lazyload" data-original="/images/theme/post-image.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
   <div class="head-mask">
     <h1 class="head-title">Cookie、Session、Token、JWT</h1>
     <div class="head-info">
@@ -299,7 +299,7 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Authorization: Bearer &lt;token&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Authorization: Bearer &lt;token&gt;<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li>服务端的保护路由将会检查请求头 Authorization 中的 JWT 信息，如果合法，则允许用户的行为</li>
@@ -313,7 +313,7 @@
 <h3 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a><strong>方式一</strong></h3><ul>
 <li>当用户希望访问一个受保护的路由或者资源的时候，可以把它放在 Cookie 里面自动发送，但是这样不能跨域，所以更好的做法是放在 HTTP 请求头信息的 Authorization 字段里，使用 Bearer 模式添加 JWT。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /calendar/v1/events</span><br><span class="line">Host: api.example.com</span><br><span class="line">Authorization: Bearer &lt;token&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">GET /calendar/v1/events<br>Host: api.example.com<br>Authorization: Bearer &lt;token&gt;<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li><p>用户的状态不会存储在服务端的内存中，这是一种 <strong>无状态的认证机制</strong></p>
@@ -332,7 +332,7 @@
 <h3 id="方式三"><a href="#方式三" class="headerlink" title="方式三"></a><strong>方式三</strong></h3><ul>
 <li>通过 URL 传输</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//www.example.com/user?token=xxx</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">http:<span class="hljs-comment">//www.example.com/user?token=xxx</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="项目中使用-JWT"><a href="#项目中使用-JWT" class="headerlink" title="项目中使用 JWT"></a><strong>项目中使用 JWT</strong></h3><p>项目地址：<a href="https://link.zhihu.com/?target=https://github.com/yjdjiayou/jwt-demo">https://github.com/yjdjiayou/jwt-demo</a></p>
 <h2 id="Token-和-JWT-的区别"><a href="#Token-和-JWT-的区别" class="headerlink" title="Token 和 JWT 的区别"></a><strong>Token 和 JWT 的区别</strong></h2><p><strong>相同：</strong></p>
@@ -499,7 +499,7 @@
     
     
     
-    <a href="tencent://message/?Menu=yes&uin=894519210 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+    <a href="tencent://message/?Menu=yes&uin=1609828358 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
       onMouseOut="this.style.color='#33333D'">
       <i class="iconfont footer-social-item  iconQQ "></i>
     </a>
@@ -517,7 +517,7 @@
     
     
     
-    <a href="https://www.instagram.com/izhaoo/ " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
+    <a href="jsvascript:; " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
       onMouseOut="this.style.color='#33333D'">
       <i class="iconfont footer-social-item  iconinstagram "></i>
     </a>
@@ -526,7 +526,7 @@
     
     
     
-    <a href="https://github.com/izhaoo " target="_blank" onMouseOver="this.style.color= '#24292E'"
+    <a href="https://github.com/BroncLee " target="_blank" onMouseOver="this.style.color= '#24292E'"
       onMouseOut="this.style.color='#33333D'">
       <i class="iconfont footer-social-item  icongithub-fill "></i>
     </a>
@@ -535,13 +535,13 @@
     
     
     
-    <a href="mailto:izhaoo@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+    <a href="mailto:leebw529@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
       onMouseOut="this.style.color='#33333D'">
       <i class="iconfont footer-social-item  iconmail"></i>
     </a>
     
   </div>
-  <div class="footer-copyright"><p>Copyright© 2019-2020 | <a target="_blank" href="https://www.izhaoo.com">zhaoo</a> .AllRightsReserved</p></div>
+  <div class="footer-copyright"><p>还好 还好 还好遇见过你</p></div>
 </footer>
   
       <div class="fab fab-plus">
