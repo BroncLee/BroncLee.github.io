@@ -1,0 +1,476 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MySQl主从复制读写分离 - 李博文的个人博客</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+
+  
+  <meta name="keywords" content="李博文"> 
+  
+  <meta name="description" content="前言在很多项目，特别是互联网项目，在使用MySQL时都..."> 
+  
+  <meta name="author" content="Libowen"> 
+
+  
+    <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  
+  
+    <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  
+  
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  
+  
+    <meta rel="mask-icon" href="/images/icons/zhaoo-logo.png" color="#333333">
+  
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_0sri83bhiv7.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        loadingImage: '/images/theme/loading.gif',
+      },
+      donate: {
+        enable: true,
+        alipay: 'https://cdn.jsdelivr.net/gh/leebw529/pic/img/Yssy17eo0u.png',
+        wechat: 'https://cdn.jsdelivr.net/gh/leebw529/pic/img/e8afdq6V0l.png'
+      },
+      motto: {
+        api: '',
+        default: '还好 还好 还好我们遇见过 。'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        alwaysShow: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: true
+      }
+    }
+  </script>
+
+  
+
+  
+<meta name="generator" content="Hexo 5.0.0"></head>
+<body class="lock-screen">
+  <div class="loading"></div>
+  <nav class="menu">
+  <div class="menu-close">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <ul class="menu-content">
+    
+    
+    
+    
+    <li class="menu-item"><a href="/ " class="underline"> 首页</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/galleries " class="underline"> 摄影</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/archives " class="underline"> 归档</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/tags " class="underline"> 标签</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/categories " class="underline"> 分类</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/about " class="underline"> 关于</a></li>
+    
+  </ul>
+  <div class="menu-copyright"><p>还好 还好 还好遇见过你</p></div>
+</nav>
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <section class="head">
+  <img   class="lazyload" data-original="https://pic4.zhimg.com/80/v2-0a7c94f28a8209cef4930fa32214f75c_720w.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">MySQl主从复制读写分离</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>8月 29, 2020</span
+        class="post-info-item">
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>7029</span>
+    </div>
+  </div>
+</section>
+  <section class="main">
+    <section class="content">
+      <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在很多项目，特别是互联网项目，在使用MySQL时都会采用主从复制、读写分离的架构。</p>
+<p>为什么要采用主从复制读写分离的架构？如何实现？有什么缺点？让我们带着这些问题开始这段学习之旅吧！</p>
+<h1 id="为什么使用主从复制、读写分离"><a href="#为什么使用主从复制、读写分离" class="headerlink" title="为什么使用主从复制、读写分离"></a>为什么使用主从复制、读写分离</h1><p>主从复制、读写分离一般是一起使用的。目的很简单，就是<strong>为了提高数据库的并发性能</strong>。你想，假设是单机，读写都在一台MySQL上面完成，性能肯定不高。如果有三台MySQL，一台mater只负责写操作，两台salve只负责读操作，性能不就能大大提高了吗？</p>
+<p>所以<strong>主从复制、读写分离就是为了数据库能支持更大的并发</strong>。</p>
+<p>随着业务量的扩展、如果是单机部署的MySQL，会导致I/O频率过高。采用<strong>主从复制、读写分离可以提高数据库的可用性</strong>。</p>
+<h1 id="主从复制的原理"><a href="#主从复制的原理" class="headerlink" title="主从复制的原理"></a>主从复制的原理</h1><p>①当Master节点进行insert、update、delete操作时，会按顺序写入到binlog中。</p>
+<p>②salve从库连接master主库，Master有多少个slave就会创建多少个binlog dump线程。</p>
+<p>③当Master节点的binlog发生变化时，binlog dump 线程会通知所有的salve节点，并将相应的binlog内容推送给slave节点。</p>
+<p>④I/O线程接收到 binlog 内容后，将内容写入到本地的 relay-log。</p>
+<p>⑤SQL线程读取I/O线程写入的relay-log，并且根据 relay-log 的内容对从数据库做对应的操作。</p>
+<p><img   class="lazyload" data-original="https://pic2.zhimg.com/80/v2-de44ec1348280cd6c709ffde0c109b79_720w.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="img"></p>
+<h1 id="如何实现主从复制"><a href="#如何实现主从复制" class="headerlink" title="如何实现主从复制"></a>如何实现主从复制</h1><p>我这里用三台虚拟机(Linux)演示，IP分别是104(Master)，106(Slave)，107(Slave)。</p>
+<p>预期的效果是一主二从，如下图所示：</p>
+<p><img   class="lazyload" data-original="https://pic4.zhimg.com/80/v2-20eead944618b130ac704df4a635fb89_720w.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="img"></p>
+<h2 id="Master配置"><a href="#Master配置" class="headerlink" title="Master配置"></a>Master配置</h2><p>使用命令行进入mysql：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">mysql -u root -p<br></code></pre></td></tr></table></figure>
+
+<p>接着输入root用户的密码(密码忘记的话就网上查一下重置密码吧~)，然后创建用户：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs text">//192.168.0.106是slave从机的IP<br>GRANT REPLICATION SLAVE ON *.* to &#x27;root&#x27;@&#x27;192.168.0.106&#x27; identified by &#x27;Java@1234&#x27;;<br>//192.168.0.107是slave从机的IP<br>GRANT REPLICATION SLAVE ON *.* to &#x27;root&#x27;@&#x27;192.168.0.107&#x27; identified by &#x27;Java@1234&#x27;;<br>//刷新系统权限表的配置<br>FLUSH PRIVILEGES;<br></code></pre></td></tr></table></figure>
+
+<p>创建的这两个用户在配置slave从机时要用到。</p>
+<p>接下来在找到mysql的配置文件/etc/my.cnf，增加以下配置：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs text"># 开启binlog<br>log-bin=mysql-bin<br>server-id=104<br># 需要同步的数据库，如果不配置则同步全部数据库<br>binlog-do-db=test_db<br># binlog日志保留的天数，清除超过10天的日志<br># 防止日志文件过大，导致磁盘空间不足<br>expire-logs-days=10 <br></code></pre></td></tr></table></figure>
+
+<p>配置完成后，重启mysql：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">service mysql restart<br></code></pre></td></tr></table></figure>
+
+<p>可以通过命令行<code>show master status\G;</code>查看当前binlog日志的信息(后面有用)：</p>
+<p><img   class="lazyload" data-original="https://pic2.zhimg.com/80/v2-1f40aab9a48da70f5f12d07c9923a742_720w.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="img"></p>
+<h2 id="Slave配置"><a href="#Slave配置" class="headerlink" title="Slave配置"></a>Slave配置</h2><p>Slave配置相对简单一点。从机肯定也是一台MySQL服务器，所以和Master一样，找到/etc/my.cnf配置文件，增加以下配置：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text"># 不要和其他mysql服务id重复即可<br>server-id=106<br></code></pre></td></tr></table></figure>
+
+<p>接着使用命令行登录到mysql服务器：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">mysql -u root -p<br></code></pre></td></tr></table></figure>
+
+<p>然后输入密码登录进去。</p>
+<p>进入到mysql后，再输入以下命令：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs text">CHANGE MASTER TO <br>MASTER_HOST=&#x27;192.168.0.104&#x27;,//主机IP<br>MASTER_USER=&#x27;root&#x27;,//之前创建的用户账号<br>MASTER_PASSWORD=&#x27;Java@1234&#x27;,//之前创建的用户密码<br>MASTER_LOG_FILE=&#x27;mysql-bin.000001&#x27;,//master主机的binlog日志名称<br>MASTER_LOG_POS=862,//binlog日志偏移量<br>master_port=3306;//端口<br></code></pre></td></tr></table></figure>
+
+<p>还没完，设置完之后需要启动：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text"># 启动slave服务<br>start slave;<br></code></pre></td></tr></table></figure>
+
+<p>启动完之后怎么校验是否启动成功呢？使用以下命令：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">show slave status\G;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到如下信息（摘取部分关键信息）：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs text">*************************** 1. row ***************************<br>               Slave_IO_State: Waiting for master to send event<br>                  Master_Host: 192.168.0.104<br>                  Master_User: root<br>                  Master_Port: 3306<br>                Connect_Retry: 60<br>              Master_Log_File: mysql-bin.000001<br>          Read_Master_Log_Pos: 619<br>               Relay_Log_File: mysqld-relay-bin.000001<br>                Relay_Log_Pos: 782<br>        Relay_Master_Log_File: mysql-bin.000001 //binlog日志文件名称<br>             Slave_IO_Running: Yes //Slave_IO线程、SQL线程都在运行<br>            Slave_SQL_Running: Yes<br>             Master_Server_Id: 104 //master主机的服务id<br>                  Master_UUID: 0ab6b3a6-e21d-11ea-aaa3-080027f8d623<br>             Master_Info_File: /var/lib/mysql/master.info<br>                    SQL_Delay: 0<br>          SQL_Remaining_Delay: NULL<br>      Slave_SQL_Running_State: Slave has read all relay log; waiting for the slave I/O thread to update it<br>           Master_Retry_Count: 86400<br>                Auto_Position: 0<br></code></pre></td></tr></table></figure>
+
+<p>另一台slave从机配置一样，不再赘述。</p>
+<h2 id="测试主从复制"><a href="#测试主从复制" class="headerlink" title="测试主从复制"></a>测试主从复制</h2><p>在master主机执行sql：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs text">CREATE TABLE `tb_commodity_info` (<br>  `id` varchar(32) NOT NULL,<br>  `commodity_name` varchar(512) DEFAULT NULL COMMENT &#x27;商品名称&#x27;,<br>  `commodity_price` varchar(36) DEFAULT &#x27;0&#x27; COMMENT &#x27;商品价格&#x27;,<br>  `number` int(10) DEFAULT &#x27;0&#x27; COMMENT &#x27;商品数量&#x27;,<br>  `description` varchar(2048) DEFAULT &#x27;&#x27; COMMENT &#x27;商品描述&#x27;,<br>  PRIMARY KEY (`id`)<br>) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT=&#x27;商品信息表&#x27;;<br></code></pre></td></tr></table></figure>
+
+<p>接着我们可以看到两台slave从机同步也创建了商品信息表：</p>
+<p><img   class="lazyload" data-original="https://picb.zhimg.com/80/v2-6376bf550db84351333c98818fb330f3_720w.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="在这里插入图片描述"></p>
+<p>主从复制就完成了！java技术爱好者有点东西哦~</p>
+<h1 id="读写分离"><a href="#读写分离" class="headerlink" title="读写分离"></a>读写分离</h1><p>主从复制完成后，我们还需要实现读写分离，master负责写入数据，两台slave负责读取数据。怎么实现呢？</p>
+<p>实现的方式有很多，以前我公司是采用AOP的方式，通过方法名判断，方法名中有get、select、query开头的则连接slave，其他的则连接master数据库。</p>
+<p>但是通过AOP的方式实现起来代码有点繁琐，有没有什么现成的框架呢，答案是有的。</p>
+<p>Apache ShardingSphere 是一套开源的分布式数据库中间件解决方案组成的生态圈，它由 JDBC、Proxy两部分组成。</p>
+<p>ShardingSphere-JDBC定位为轻量级 Java 框架，在 Java 的 JDBC 层提供的额外服务。 它使用客户端直连数据库，以 jar  包形式提供服务，无需额外部署和依赖，可理解为增强版的 JDBC 驱动，完全兼容 JDBC 和各种 ORM 框架。</p>
+<p>读写分离就可以使用ShardingSphere-JDBC实现。</p>
+<p><img   class="lazyload" data-original="https://picb.zhimg.com/80/v2-851a8cb8bb257a22184a0f26ae64aa96_720w.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="在这里插入图片描述"></p>
+<p>下面演示一下SpringBoot+Mybatis+Mybatis-plus+druid+ShardingSphere-JDBC代码实现。</p>
+<h2 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h2><p>版本说明：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">SpringBoot：2.0.1.RELEASE<br>druid：1.1.22<br>mybatis-spring-boot-starter:1.3.2<br>mybatis-plus-boot-starter：3.0.7<br>sharding-jdbc-spring-boot-starter:4.1.1<br></code></pre></td></tr></table></figure>
+
+<p>添加sharding-jdbc的maven配置：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">&lt;dependency&gt;<br>    &lt;groupId&gt;org.apache.shardingsphere&lt;/groupId&gt;<br>    &lt;artifactId&gt;sharding-jdbc-spring-boot-starter&lt;/artifactId&gt;<br>    &lt;version&gt;4.1.1&lt;/version&gt;<br>&lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
+
+<p>然后在application.yml添加配置：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs text"># 这是使用druid连接池的配置，其他的连接池配置可能有所不同<br>spring:<br>  shardingsphere:<br>    datasource:<br>      names: master,slave0,slave1<br>      master:<br>        type: com.alibaba.druid.pool.DruidDataSource<br>        driver-class-name: com.mysql.jdbc.Driver<br>        url: jdbc:mysql://192.168.0.108:3306/test_db?useUnicode=true&amp;characterEncoding=utf8&amp;tinyInt1isBit=false&amp;useSSL=false&amp;serverTimezone=GMT<br>        username: yehongzhi<br>        password: YHZ@1234<br>      slave0:<br>        type: com.alibaba.druid.pool.DruidDataSource<br>        driver-class-name: com.mysql.jdbc.Driver<br>        url: jdbc:mysql://192.168.0.109:3306/test_db?useUnicode=true&amp;characterEncoding=utf8&amp;tinyInt1isBit=false&amp;useSSL=false&amp;serverTimezone=GMT<br>        username: yehongzhi<br>        password: YHZ@1234<br>      slave1:<br>        type: com.alibaba.druid.pool.DruidDataSource<br>        driver-class-name: com.mysql.jdbc.Driver<br>        url: jdbc:mysql://192.168.0.110:3306/test_db?useUnicode=true&amp;characterEncoding=utf8&amp;tinyInt1isBit=false&amp;useSSL=false&amp;serverTimezone=GMT<br>        username: yehongzhi<br>        password: YHZ@1234<br>    props:<br>      sql.show: true<br>    masterslave:<br>      load-balance-algorithm-type: round_robin<br>    sharding:<br>      master-slave-rules:<br>        master:<br>          master-data-source-name: master<br>          slave-data-source-names: slave0,slave1<br></code></pre></td></tr></table></figure>
+
+<p>sharding.master-slave-rules是标明主库和从库，一定不要写错，否则写入数据到从库，就会导致无法同步。</p>
+<p>load-balance-algorithm-type是路由策略，round_robin表示轮询策略。</p>
+<p>启动项目，可以看到以下信息，代表配置成功：</p>
+<p><img   class="lazyload" data-original="https://pic1.zhimg.com/80/v2-a5870c8c2df76a309ffd91386dff42b8_720w.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="img"></p>
+<p>编写Controller接口：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs text">/**<br> * 添加商品<br> *<br> * @param commodityName  商品名称<br> * @param commodityPrice 商品价格<br> * @param description    商品价格<br> * @param number         商品数量<br> * @return boolean 是否添加成功<br> * @author java技术爱好者<br> */<br>@PostMapping(&quot;/insert&quot;)<br>public boolean insertCommodityInfo(@RequestParam(name = &quot;commodityName&quot;) String commodityName,<br>                                   @RequestParam(name = &quot;commodityPrice&quot;) String commodityPrice,<br>                                   @RequestParam(name = &quot;description&quot;) String description,<br>                                   @RequestParam(name = &quot;number&quot;) Integer number) throws Exception &#123;<br>    return commodityInfoService.insertCommodityInfo(commodityName, commodityPrice, description, number);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>准备就绪，开始测试！</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>打开POSTMAN，添加商品：</p>
+<p><img   class="lazyload" data-original="https://pic1.zhimg.com/80/v2-51d13136e6173dca1502f0acd4e34837_720w.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="img"></p>
+<p>控制台可以看到如下信息：</p>
+<p><img   class="lazyload" data-original="https://picb.zhimg.com/80/v2-985e56b27f8e01e21d205b00daf10c83_720w.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="img"></p>
+<p>查询数据的话则通过slave进行：</p>
+<p><img   class="lazyload" data-original="https://pic4.zhimg.com/80/v2-f1babce9a4b80fc227a1f3fabdd434ca_720w.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="img"></p>
+<p><img   class="lazyload" data-original="https://pic2.zhimg.com/80/v2-ec8191f43d601f577fd223ff4bc97af5_720w.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="img"></p>
+<p>就是这么简单！</p>
+<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><p>尽管主从复制、读写分离能很大程度保证MySQL服务的高可用和提高整体性能，但是问题也不少：</p>
+<ul>
+<li><strong>从机是通过binlog日志从master同步数据的，如果在网络延迟的情况，从机就会出现数据延迟。那么就有可能出现master写入数据后，slave读取数据不一定能马上读出来</strong>。</li>
+</ul>
+<p>可能有人会问，有没有事务问题呢？</p>
+<p>实际上这个框架已经想到了，我们看回之前的那个截图，有一句话是这样的：</p>
+<p><img   class="lazyload" data-original="https://pic3.zhimg.com/80/v2-e818b55f06040c4d0d14550865b85a36_720w.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="img"></p>
+
+    </section>
+    <section class="extra">
+      
+        <ul class="copyright">
+  
+  <li><strong>本文作者：</strong>Libowen</li>
+  <li><strong>本文链接：</strong><a href="libowen.info/2020/08/29/archives/MySQL1/index.html">libowen.info/2020/08/29/archives/MySQL1/index.html</a></li>
+  <li><strong>版权声明：</strong>本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
+      rel="external nofollow" target="_blank"> BY-NC-SA </a>许可协议，转载请注明出处！</li>
+  
+</ul>
+      
+      
+        <section class="donate">
+  <div class="qrcode">
+    <img   class="lazyload" data-original="https://cdn.jsdelivr.net/gh/leebw529/pic/img/Yssy17eo0u.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+      
+      
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT/" rel="tag">IT</a></li></ul>
+
+      
+<nav class="nav">
+  
+  
+    <a href="/2020/08/29/archives/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">冒泡排序<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+    </section>
+    
+      <section class="comments">
+        
+          <div class="btn" id="comments-btn">查看评论</div>
+        
+        
+      </section>
+    
+  </section>
+</article>
+  </div>
+</main>
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1609828358 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="jsvascript:; " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconinstagram "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/BroncLee " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:leebw529@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>还好 还好 还好遇见过你</p></div>
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  <div class="fab fab-daovoice">
+    <i class="iconfont iconcomment"></i>
+  </div>
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  <div class="fab fab-menu">
+    <i class="iconfont iconmenu"></i>
+  </div>
+  
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/modules.js"></script>
+<script src="/js/zui.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i["DaoVoiceObject"] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    a.charset = "utf-8";
+    m.parentNode.insertBefore(a, m)
+  })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+    "//widget.daovoice.io/widget/0f81ff2f.js", "daovoice")
+  daovoice('init', {
+    app_id: "abcdefg"
+  }, {
+    launcher: {
+      disableLauncherIcon: true,
+    },
+  });
+  daovoice('update');
+</script>
+
+
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4c204d8bc027a0455b5fc642ac334ca8";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+</html>
